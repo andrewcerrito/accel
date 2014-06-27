@@ -16,7 +16,8 @@
     <author href="https://build.phonegap.com" email="support@phonegap.com">
         Andrew Cerrito
     </author>
-</widget>
 
 <gap:platform name="android" />
 <preference name="orientation" value="landscape" />
+</widget>
+
