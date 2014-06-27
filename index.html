@@ -10,7 +10,8 @@
 const fps = 30;
 var x = 0, y = 0, z = 0, ax = 0, ay = 0, az = 0;
 
-
+	// toggle movement for Android phone
+	androidMode = true;
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
@@ -53,6 +54,10 @@ function deviceMove(e) {
 	ax = Math.round(e.accelerationIncludingGravity.x*10)/10;
 	ay = Math.round(e.accelerationIncludingGravity.y*10)/10;
 	az = Math.round((e.accelerationIncludingGravity.z - 9.80665)*10)/10;
+	// reverse x-axis movement for Android phones
+	if (androidMode) {
+		ax = -ax;
+	}
 	//document.getElementById("accelx").innerHTML = ax;
 	//document.getElementById("accely").innerHTML = ay;
 	//document.getElementById("accelz").innerHTML = az;
