@@ -5,12 +5,22 @@
 	
 </canvas>
 
+
+<script src="sb-1.4.1.js"></script>
+
 <script type="text/javascript">
+
+//Spacebrew
+var rand = Math.floor((Math.random() * 100) + 1);
+var sb = new Spacebrew.Client("10.200.140.123", "JS Spacebrew Test" + rand)
+sb.addPublish("testBoolean", "boolean", false);
+sb.connect();
+var brewBoolean = false;
 
 const fps = 30;
 var x = 0, y = 0, z = 0, ax = 0, ay = 0, az = 0;
 
-	// toggle movement for Android phone
+	// toggle correct axis movement for Android phone
 	androidMode = true;
 
 	canvas = document.getElementById("canvas");
@@ -18,6 +28,7 @@ var x = 0, y = 0, z = 0, ax = 0, ay = 0, az = 0;
 	resizeCanvas();
 	window.addEventListener("resize",resizeCanvas,false);
 	window.addEventListener("touchstart", onTouch, false);
+	window.addEventListener("click", mouseClicked, false);
 	timerID = setInterval("draw()",(1000/fps));
 
 	if(window.DeviceMotionEvent) {
@@ -66,6 +77,28 @@ function deviceMove(e) {
 function onTouch(e) {
 	e.preventDefault();
 	context.clearRect(0,0,canvas.width,canvas.height);
+	if (!brewBoolean){
+		sb.send("testBoolean","boolean","true");
+		brewBoolean = true;
+	}
+	else {
+		sb.send("testBoolean","boolean","false");
+		brewBoolean = false;
+	}
+console.log("boolean sent"); 
+}
+
+// Spacebrew debugging - take this out once touch works
+function mouseClicked(e) {
+if (!brewBoolean){
+		sb.send("testBoolean","boolean","true");
+		brewBoolean = true;
+	}
+	else {
+		sb.send("testBoolean","boolean","false");
+		brewBoolean = false;
+	}
+console.log("boolean sent"); 
 }
 
 function drawCircle(x,y,rad, context) {
