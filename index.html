@@ -20,8 +20,9 @@ var brewBoolean = false;
 const fps = 30;
 var x = 0, y = 0, z = 0, ax = 0, ay = 0, az = 0;
 
-	// toggle correct axis movement for Android phone
-	androidMode = true;
+	// toggle correct axis movement for different phone systems
+	androidMode = false;
+	iOSMode = true;
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
@@ -68,6 +69,10 @@ function deviceMove(e) {
 	// reverse x-axis movement for Android phones
 	if (androidMode) {
 		ax = -ax;
+	}
+	// reverse y-axis movement for iOS devices
+	if (iOSMode) {
+		ay = -ay;
 	}
 	//document.getElementById("accelx").innerHTML = ax;
 	//document.getElementById("accely").innerHTML = ay;

@@ -34,10 +34,16 @@
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/css \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/img \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/index.html \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/indexMODIFIED.html \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/js \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/plugins \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/css/index.css \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/img/logo.png \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/js/index.js \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/js/jq.js \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/js/sb-1.4.1.js \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/js/websocket.js \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/plugins/com.ququplay.websocket.WebSocket \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/plugins/com.ququplay.websocket.WebSocket/www \
+/Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/assets/www/plugins/com.ququplay.websocket.WebSocket/www/phonegap-websocket.js \
 /Users/andrew.cerrito/desktop/test/accel2/accelapp/platforms/android/ant-build/AndroidManifest.xml \

@@ -26,102 +26,124 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Hello World</title>
-        <canvas id="canvas" width="500" height="500" tabindex="0">Canvas Not Supported</canvas>
-    </head>
-    <body>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/sb-1.4.1.js"></script>
         <script type="text/javascript" src="js/jq.js"></script>
-		<script type="text/javascript">
+    	<script type="text/javascript" src="js/sb-1.4.1.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+        <script type="text/javascript">
+console.log("*** Head of index.html");
         
 //Spacebrew
-var rand = Math.floor((Math.random() * 100) + 1);
-var sb = new Spacebrew.Client("50.112.244.54", "Android Spacebrew Test" + rand)
-sb.addPublish("testBoolean", "boolean", false);
-sb.connect();
+var sb;
 var brewBoolean = false;
+
+
+    var rand = Math.floor((Math.random() * 100) + 1);
+	sb = new Spacebrew.Client("50.112.244.54", "iOS Spacebrew Test" + rand);
+	sb.addPublish("testBoolean", "boolean", false);
+	sb.connect();
+	console.log('*** connected');
 
 const fps = 30;
 var x = 0, y = 0, z = 0, ax = 0, ay = 0, az = 0;
 
-	// toggle correct axis movement for Android phone
-	androidMode = true;
+// toggle correct axis movement for Android phone
+androidMode = true;
 
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");
-	resizeCanvas();
-	window.addEventListener("resize",resizeCanvas,false);
-	window.addEventListener("touchstart", onTouch, false);
-	timerID = setInterval("draw()",(1000/fps));
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");
+resizeCanvas();
+window.addEventListener("resize",resizeCanvas,false);
+window.addEventListener("touchstart", onTouch, false);
+window.addEventListener("click", mouseClicked, false);
+timerID = setInterval("draw()",(1000/fps));
 
-	if(window.DeviceMotionEvent) {
-		console.log("Accelerometer motion supported");
-		window.addEventListener("devicemotion",deviceMove,false);
-	}
-	else {
-		console.log("motion not supported");
-	}
-	
-function draw(){
-context.fillStyle = "rgb(0,0,0)";
-drawCircle(x,y,z+6,context);
-if(x > canvas.width) x = canvas.width;
-	else if (x < 0) x = 0;
-		else x += ax;
-if(y > canvas.height-30) y = canvas.height-30;
-	else if (y < 0) y = 0;
-		else y += ay;		
-//z += az;
-context.font = ("normal 10pt Helvetica");
-context.clearRect(0,canvas.height-30,canvas.width,canvas.height);
-context.fillText('X accel: ' + ax + " Y accel: " + ay + " Z accel: " + az, 10,canvas.height-20);
+if(window.DeviceMotionEvent) {
+    console.log("Accelerometer motion supported");
+    window.addEventListener("devicemotion",deviceMove,false);
 }
-
-function resizeCanvas() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-}
-
-function deviceMove(e) {
-	ax = Math.round(e.accelerationIncludingGravity.x*10)/10;
-	ay = Math.round(e.accelerationIncludingGravity.y*10)/10;
-	az = Math.round((e.accelerationIncludingGravity.z - 9.80665)*10)/10;
-	// reverse x-axis movement for Android phones
-	if (androidMode) {
-		ax = -ax;
-	}
-	//document.getElementById("accelx").innerHTML = ax;
-	//document.getElementById("accely").innerHTML = ay;
-	//document.getElementById("accelz").innerHTML = az;
-}
-
-function onTouch(e) {
-	e.preventDefault();
-	context.clearRect(0,0,canvas.width,canvas.height);
-	if (!brewBoolean){
-		sb.send("testBoolean","boolean","true");
-		brewBoolean = true;
-	}
-	else {
-		sb.send("testBoolean","boolean","false");
-		brewBoolean = false;
-	}
-console.log("butt. touch boolean sent"); 
-}
-
-function drawCircle(x,y,rad, context) {
-	context.beginPath();
-	context.arc(x,y,rad,getRadians(0),getRadians(360),false);
-	context.fill();
-}
-
-//degree to radian function
-function getRadians(dgrs){
-	var degrees = (Math.PI/180)*dgrs;
-	return degrees;
-}
-
+        else {
+            alert("motion not supported");
+        }
+        //alert("initialized");
+        
+        
+        function draw(){
+            context.fillStyle = "rgb(0,0,0)";
+            drawCircle(x,y,z+6,context);
+            if(x > canvas.width) x = canvas.width;
+            else if (x < 0) x = 0;
+            else x += ax;
+            if(y > canvas.height-30) y = canvas.height-30;
+            else if (y < 0) y = 0;
+            else y += ay;
+            //z += az;
+            context.font = ("normal 10pt Helvetica");
+            context.clearRect(0,canvas.height-30,canvas.width,canvas.height);
+            context.fillText('X accel: ' + ax + " Y accel: " + ay + " Z accel: " + az, 10,canvas.height-20);
+        }
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        function deviceMove(e) {
+            ax = Math.round(e.accelerationIncludingGravity.x*10)/10;
+            ay = Math.round(e.accelerationIncludingGravity.y*10)/10;
+            az = Math.round((e.accelerationIncludingGravity.z - 9.80665)*10)/10;
+            // reverse x-axis movement for Android phones
+            if (androidMode) {
+                ax = -ax;
+            }
+            //document.getElementById("accelx").innerHTML = ax;
+            //document.getElementById("accely").innerHTML = ay;
+            //document.getElementById("accelz").innerHTML = az;
+        }
+        
+        function onTouch(e) {
+            e.preventDefault();
+            context.clearRect(0,0,canvas.width,canvas.height);
+            if (!brewBoolean){
+                sb.send("testBoolean","boolean","true");
+                brewBoolean = true;
+            }
+            else {
+                sb.send("testBoolean","boolean","false");
+                brewBoolean = false;
+            }
+            console.log("boolean sent");
+        }
+        
+        // Spacebrew debugging - take this out once touch works
+        function mouseClicked(e) {
+            if (!brewBoolean){
+                sb.send("testBoolean","boolean","true");
+                brewBoolean = true;
+            }
+            else {
+                sb.send("testBoolean","boolean","false");
+                brewBoolean = false;
+            }
+            console.log("boolean sent"); 
+        }
+        
+        function drawCircle(x,y,rad, context) {
+            context.beginPath();
+            context.arc(x,y,rad,getRadians(0),getRadians(360),false);
+            context.fill();
+        }
+        
+        //degree to radian function
+        function getRadians(dgrs){
+            var degrees = (Math.PI/180)*dgrs;
+            return degrees;
+        }
         </script>
+    </head>
+    <body>
+     <canvas id="canvas" width="500" height="500" tabindex="0">Canvas Not Supported</canvas>
+	
     </body>
 </html>
